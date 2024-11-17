@@ -28,7 +28,7 @@ export class CartService {
   }
 
   removeTraining(training: Training): void {
-    this.cart = this.cart.filter(item => item !== training);
+    this.cart = this.cart.filter(item => item.id !== training.id);
     console.log('Panier mis à jour :', this.cart);
 }
 
@@ -41,8 +41,12 @@ export class CartService {
   }
 
   getTotal(): number {
-    return this.cart.reduce((acc, training) => acc + (training.price * training.quantity), 0);
-  }
+    let total = 0;
+    for (const training of this.cart) {
+        total += training.price * training.quantity;
+    }
+    return total;
+}
 
   clearCart(): void {
     this.cart = [];

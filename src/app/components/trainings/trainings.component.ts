@@ -22,7 +22,7 @@ export class TrainingsComponent implements OnInit {
   }
 
   onAddToCart(training: Training): void {
-    console.log('Adding to cart:', training);
+    console.log('Article ajouté au panier:', training);
     this.cartService.addTraining(training);
     this.router.navigateByUrl('cart');
   }
