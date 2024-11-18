@@ -12,10 +12,12 @@ export class CustomerComponent implements OnInit {
 
   constructor(public cartService: CartService, private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
 
-  onSaveCustomer(customerData: Customer): void {
-    this.cartService.setCustomer(customerData);
+  onSaveCustomer(customer: Customer): void {
+    this.cartService.setCustomer(customer);
     this.router.navigateByUrl('/order');        
   }
 }

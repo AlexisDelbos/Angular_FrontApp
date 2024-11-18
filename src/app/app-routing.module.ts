@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'order',
     component: OrderComponent
-  }
+  },
+  {
+    path: '', redirectTo: 'trainings', pathMatch: 'full'
+  },
+
 
 ];
 

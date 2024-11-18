@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="border p-3">
+    <div class="border">
         <table class="table table-bordered">
           <thead>
             <tr class="bg-light">
@@ -8,18 +8,18 @@
           </thead>
           <tbody>
             <tr>
-              <td class="align-top" style="width: 50%;">
+              <td style="width: 50%;">
                 <h4>Informations du Client</h4>
-                <p style="border-bottom: 1px solid #ccc;"><strong>Nom du Client :</strong> {{ customer?.lastname }}</p>
-                <p style="border-bottom: 1px solid #ccc;"><strong>Prénom du Client :</strong> {{ customer?.firstname }}</p>
-                <p style="border-bottom: 1px solid #ccc;"><strong>Adresse Client :</strong> {{ customer?.adress }}</p>
-                <p style="border-bottom: 1px solid #ccc;"><strong>Tel Client :</strong> {{ customer?.mobileNumber }}</p>
-                <p style="border-bottom: 1px solid #ccc;"><strong>Email :</strong> {{ customer?.mail }}</p>
+                <p style="border-bottom: 1px solid #ccc;"><strong>Nom du Client :</strong> {{ customer.lastname }}</p>
+                <p style="border-bottom: 1px solid #ccc;"><strong>Prénom du Client :</strong> {{ customer.firstname }}</p>
+                <p style="border-bottom: 1px solid #ccc;"><strong>Adresse Client :</strong> {{ customer.adress }}</p>
+                <p style="border-bottom: 1px solid #ccc;"><strong>Tel Client :</strong> {{ customer.mobileNumber }}</p>
+                <p style="border-bottom: 1px solid #ccc;"><strong>Email :</strong> {{ customer.mail }}</p>
                 <p style="border-bottom: 1px solid #ccc;"><strong>Numéro de la commande :</strong> ???</p>
                 <p style="border-bottom: 1px solid #ccc;"><strong>Date de la commande :</strong> {{ orderDate }}</p>
               </td>
     
-              <td class="align-top" style="width: 50%;">
+              <td style="width: 50%;">
                 <h4>Panier</h4>
                 <table class="table table-striped">
                   <thead>
@@ -27,7 +27,8 @@
                       <th>#</th>
                       <th>Nom</th>
                       <th>Quantité</th>
-                      <th>Prix</th>
+                      <th>Prix Unitaire</th>
+                      <th>Prix Total </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -35,10 +36,11 @@
                       <td>{{ i + 1 }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.quantity }}</td>
+                      <td>{{ item.price  | number:'1.2-2' }}</td>
                       <td>{{ (item.price * item.quantity) | number:'1.2-2' }}</td>
                     </tr>
                     <tr>
-                      <td colspan="3"><strong>Total</strong></td>
+                      <td colspan="4"><strong>Total</strong></td>
                       <td><strong>{{ total | number:'1.2-2' }}</strong></td>
                     </tr>
                   </tbody>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Training } from 'src/app/model/training.model';
 import { Customer } from 'src/app/model/customer.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -9,12 +10,12 @@ import { Customer } from 'src/app/model/customer.model';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  customer: Customer | undefined;
+  customer: Customer;
   cart: Training[] = [];
   total: number = 0;
   orderDate: string = new Date().toLocaleDateString();
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router : Router) {}
 
   ngOnInit(): void {
     this.customer = this.cartService.getCustomer(); 
@@ -23,7 +24,10 @@ export class OrderComponent implements OnInit {
   }
 
   confirmOrder(): void {
-    alert("Aujourd'hui c'est gratuit, merci de votre visite :)");
+    alert("Aujourd'hui c'est gratuit, merci de votre visite !");
+    this.router.navigateByUrl('');
+    this.cartService.deleteCart();
+    
   }
   
 }

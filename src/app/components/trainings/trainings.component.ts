@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./trainings.component.css']
 })
 export class TrainingsComponent implements OnInit {
-  listTrainings: Training[] | undefined;
+  listTrainings: Training[] ;
 
   constructor(private cartService: CartService, private router: Router) { }
 
@@ -22,9 +22,11 @@ export class TrainingsComponent implements OnInit {
   }
 
   onAddToCart(training: Training): void {
-    console.log('Article ajouté au panier:', training);
+    console.log(' Article ajouté au panier : ', training);
     this.cartService.addTraining(training);
     this.router.navigateByUrl('cart');
   }
   
 }
+
+

@@ -17,7 +17,7 @@ import { OrderComponent } from './components/order/order.component';
     TrainingsComponent,
     CartComponent,
     CustomerComponent,    
-    OrderComponent
+    OrderComponent, 
 
   ],
   imports: [
