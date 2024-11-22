@@ -10,9 +10,9 @@ import { Customer } from '../model/customer.model';
   providedIn: 'root'
 })
 export class CartService {
-  private cart: Training[] = [];
+  
+  private cart : Map<number,Training>;
   private customer: Customer = {
-    id: '',
     lastname: '',
     firstname: '',
     adress: '',
@@ -21,82 +21,62 @@ export class CartService {
   };
   localStorageCart : string = 'cart';
 
-  constructor() { }
-
-  addTraining(training: Training): void {
-    if (training.quantity <= 0) {
-      alert('La quantité doit etre supérieur a 0')
-      return;
-    }
-    this.cart = this.getCart();
-
-    if (this.cart.length > 0) {
-      const isExistTraining = this.cart.findIndex(
-        (i) => i.id === training.id
-      );
-
-      if (isExistTraining !== -1) {
-        this.cart[isExistTraining].quantity += training.quantity;
-      } else {
-        this.cart.push(training);
-      }
+  constructor() {
+    let cartP = localStorage.getItem(this.localStorageCart);
+    if (cartP) {
+      this.cart = new Map(JSON.parse(cartP).map((item: any) => [item.id, item])); 
     } else {
-      this.cart.push(training);
+      this.cart = new Map<number, Training>();
     }
-    localStorage.setItem(
-      this.localStorageCart,
-      JSON.stringify(this.cart)
-    );
   }
 
+   addTraining(training : Training){
+    this.cart.set(training.id, training);
+    this.saveCart();
+   }
 
-  getCart(): Training[] {
-    try {
-      const storage: string = localStorage.getItem(this.localStorageCart);
-      return storage ? JSON.parse(storage) : [];
-    } catch (error) {
-      return [];
-    }  
+   saveCustomer(customer : Customer){
+    localStorage.setItem('customer', JSON.stringify(customer));
+   }
+
+   saveCart() {
+    localStorage.setItem(this.localStorageCart, JSON.stringify(Array.from(this.cart.values())));
   }
 
-  removeTraining(training: Training): void {
-    const trainingsCart = this.getCart();
-    const newCart = trainingsCart?.filter((item) => {
-      return item.id !== training.id;
+   removeTraining(training : Training){
+    this.cart.delete(training.id);
+    this.saveCart();
+   }
+
+   getCart() : Training[] | undefined{
+    if(this.cart.size > 0) {
+      return Array.from(this.cart.values());
+    }
+    else return undefined;
+   }
+
+   getTotal() : number {
+    let amount : number = 0;
+    this.cart.forEach(training => {
+      amount += training.price * training.quantity;
     });
-    localStorage.setItem(this.localStorageCart, JSON.stringify(newCart));
-    console.log('Article supprimé du panier  :', this.cart);
-}
+    return amount;
+   }
 
-getCustomer(): Customer {
-  try {
-    const customerStorage: string = localStorage.getItem('customer');
-    return customerStorage ? JSON.parse(customerStorage) : this.customer;
-  } catch (error) {
-    console.error('Erreur lors de la récupération du client depuis le localStorage :', error);
-    return this.customer;
-  }
-}
+   getCustomer() : Customer {
+    let customer = localStorage.getItem('customer');
+    if(customer) return JSON.parse(customer);
+    return new Customer("unknown","","","","");
+   }
 
-setCustomer(customer: Customer): void {
-  this.customer = customer;
-  try {
-    localStorage.setItem('customer', JSON.stringify(this.customer));
-  } catch (error) {
-    console.error('Erreur lors de la sauvegarde du client dans le localStorage :', error);
-  }
-}
+   clearLocalStorage(){
+    this.cart.clear();
+    localStorage.setItem(this.localStorageCart, ''); 
 
+   }
 
-  getTotal(): number {
-    let total = 0;
-    for (const training of this.cart) {
-        total += training.price * training.quantity;
-    }
-    return total;
-}
-
-deleteCart() {
-  localStorage.removeItem(this.localStorageCart);
-}
+   sendOrgerToLocaleStorage(){
+    let order = { customer : this.getCustomer(), cart : this.getCart(), total : this.getTotal()};
+    localStorage.setItem('order', JSON.stringify(order));
+   }
 }

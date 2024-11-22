@@ -10,24 +10,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  customer: Customer;
+
+  showModal=false;
+  modalTitle='Commande confirmée';
+  modalContent= 'Votre commande a bien été prise en compte, merci de nous avoir donné :';
+  modalData: any;
+
+  customer: Customer | undefined;
   cart: Training[] = [];
   total: number = 0;
   orderDate: string = new Date().toLocaleDateString();
 
-  constructor(private cartService: CartService, private router : Router) {}
+  constructor(public cartService: CartService, private router : Router) {}
 
   ngOnInit(): void {
     this.customer = this.cartService.getCustomer(); 
-    this.cart = this.cartService.getCart();         
-    this.total = this.cartService.getTotal();       
+    this.cart = this.cartService.getCart();
+  }
+
+  onOrder(){
+
   }
 
   confirmOrder(): void {
-    alert("Aujourd'hui c'est gratuit, merci de votre visite !");
+    this.modalData = this.cartService.getTotal();
+    this.showModal = true;
+      
+  }  
+
+  onModalClose(): void{
+    this.showModal = false;
+    this.cartService.clearLocalStorage();
     this.router.navigateByUrl('');
-    this.cartService.deleteCart();
-    
+    console.log("Back to the future ! ");
   }
-  
 }

@@ -2,33 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Training } from 'src/app/model/training.model';
 import { Router } from '@angular/router';
-
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cart: Training[] = [];
+  cart: Training[] | undefined;
   total: number = 0;
-  constructor(private cartService: CartService, private router : Router) { }
+  constructor(private authService : AuthenticateService, private cartService: CartService, private router : Router) {
+    
+   }
 
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
-    this.totalAmount(); 
+    this.total = this.cartService.getTotal(); 
   }
 
-  onRemoveFromCart(training: Training): void {
+  onRemoveFromCart(training: Training) {
     this.cartService.removeTraining(training);
     this.cart = this.cartService.getCart(); 
-    this.totalAmount(); 
   }
 
-  totalAmount(): void {
-    this.total = this.cart.reduce((acc, training) => acc + (training.price * training.quantity), 0);
-  }
+
   
   order(): void{
-    this.router.navigateByUrl('customer');
+    if(this.authService.getUser().email){
+
+      this.router.navigateByUrl('customer');
+    } else{
+      this.router.navigateByUrl('connexion');
+    }
   }
 }

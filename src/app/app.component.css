@@ -1,0 +1,10 @@
+.is-active {
+    font-weight: bold; 
+    color: white; 
+    background-color: #2980b9; 
+  }
+  
+  .is-active .nav-link {
+    text-decoration: underline;
+  }
+  
