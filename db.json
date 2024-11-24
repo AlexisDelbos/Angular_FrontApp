@@ -38,6 +38,7 @@
   ],
   "users": [
     {
+      "id": 1,
       "email": "elbab@gmail.com",
       "password": "$2a$10$McACabRuqW1MvSQuayp/0u3PYVvaYmOqJq3cfMvY6zCrpFOGcPd6e",
       "roles": [
@@ -47,10 +48,9 @@
     },
     {
       "email": "hugo@gmail.com",
-      "password": "$2a$10$McACabRuqW1MvSQuayp/0u3PYVvaYmOqJq3cfMvY6zCrpFOGcPd6e",
-      "roles": [
-        "USER"
-      ]
+      "password": "$2a$10$/iOz2Z8zt9h1krlYtxHuneyBW/R4C5LzX30uGHtupj73l44rgyu0y",
+      "roles": "USER",
+      "id": 2
     }
   ]
 }

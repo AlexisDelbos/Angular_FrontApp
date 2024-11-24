@@ -6,6 +6,10 @@
     padding: 10px;
   "
 >
+  <h3 class="text-center" style="margin-bottom: 10px;">Nos formations à vendre</h3>
+
+  <hr style="border-top: 2px solid black; margin-bottom: 20px;" />
+
   <ng-container *ngIf="listTrainings; else loading">
     <table
       class="table table-striped"
@@ -19,8 +23,6 @@
           <th>PRIX</th>
           <th>QUANTITY</th>
           <th>PANIER</th>
-          <th>EDITER</th>
-          <th>SUPPRIMER</th>
         </tr>
       </thead>
       <tbody>
@@ -45,7 +47,7 @@
               class="btn btn-primary btn-sm"
               (click)="onAddToCart(training)"
             >
-              <i class="fas fa-cart-plus"></i>
+              <i class="fas fa-cart-plus"> Ajouter</i>
             </button>
           </td>
           <td>
@@ -54,7 +56,7 @@
               class="btn btn-danger btn-sm"
               (click)="deleteOneTraining(training)"
             >
-              <i class="fas fa-trash-alt"></i>
+              <i class="fas fa-trash-alt"> Supprimer</i>
             </button>
           </td>
           <td>
@@ -63,7 +65,7 @@
               class="btn btn-warning btn-sm"
               (click)="goToUpdate(training)"
             >
-              <i class="fas fa-edit"></i>
+              <i class="fas fa-edit"> Mise à jour</i>
             </button>
           </td>
         </tr>

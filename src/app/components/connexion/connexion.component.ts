@@ -44,8 +44,7 @@ export class ConnexionComponent implements OnInit {
           password
         );
         if (isPassword) {
-          this._toastService.info('Connexion réussie');
-
+          this.addInfoToastSuccessConnexion();
           this.authService.setUser(
             new User(data[0].email, data[0].password, data[0].roles)
           );
@@ -55,6 +54,8 @@ export class ConnexionComponent implements OnInit {
             this.router.navigate(['/trainings']);
           }
         } else {
+          this.addInfoToastFailedConnexion();
+
           this.errorMessage = 'Email ou mot de passe incorrect';
         }
       });
@@ -63,7 +64,11 @@ export class ConnexionComponent implements OnInit {
     }
   }
 
-  addInfoToastConnexion() {
+  addInfoToastSuccessConnexion() {
     this._toastService.success('Connexion réussie');
+  }
+
+  addInfoToastFailedConnexion() {
+    this._toastService.error('Mot de passe incorrect, veuillez réessayer');
   }
 }

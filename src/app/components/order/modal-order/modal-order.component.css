@@ -13,7 +13,7 @@
   
 
   .modal-overlay {
-    background-color: #3498db;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     width: 400px; 
@@ -36,6 +36,6 @@
   
   .modal-body {
     margin-top: 10px;
-    color: white;
+    color: black;
   }
   

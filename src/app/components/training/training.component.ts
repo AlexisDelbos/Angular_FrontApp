@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
-
+import { ToastService } from 'angular-toastify';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
@@ -15,7 +15,7 @@ export class TrainingComponent implements OnInit {
   message: string | null = null;
   trainingToUpdate: Training;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private _toastService : ToastService, private route: ActivatedRoute) {
     this.trainingForm = new FormGroup({
       name: new FormControl(''),
       description: new FormControl(''),
@@ -81,5 +81,11 @@ export class TrainingComponent implements OnInit {
       }
     } else this.message = 'il faut remplir les champs';
     trainingForm.reset();
+    this.addInfoToastAddTraining();
+  }
+
+  
+  addInfoToastAddTraining() {
+    this._toastService.success('Article ajouté a la bdd');
   }
 }

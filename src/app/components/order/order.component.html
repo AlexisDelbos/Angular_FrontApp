@@ -36,12 +36,12 @@
                       <td>{{ i + 1 }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.quantity }}</td>
-                      <td>{{ item.price }}</td>
-                      <td>{{ (item.price * item.quantity) }}</td>
+                      <td>{{ item.price | currencyAfter }}</td>
+                      <td>{{ (item.price * item.quantity) | currencyAfter }}</td>
                     </tr>
                     <tr>
                       <td colspan="4"><strong>Total</strong></td>
-                      <td><strong>{{ total }}</strong></td>
+                      <td><strong>{{ total | currencyAfter }}</strong></td>
                     </tr>
                   </tbody>
                 </table>
@@ -57,5 +57,5 @@
  [title]="modalTitle"
  (close)="onModalClose()">
 <p>{{modalContent}}</p>
-<p>Montant total : {{modalData}}</p>
+<p>Montant total : {{modalData | currencyAfter}}</p>
 </app-modal-order>

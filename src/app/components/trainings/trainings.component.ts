@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Router, Route } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
-
+import { ToastService } from 'angular-toastify';
 @Component({
   selector: 'app-trainings',
   templateUrl: './trainings.component.html',
@@ -18,7 +18,8 @@ export class TrainingsComponent implements OnInit {
     private apiService: ApiService,
     private cartService: CartService,
     private router: Router,
-    public authService: AuthenticateService
+    public authService: AuthenticateService,
+    private _toastService : ToastService
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +34,12 @@ export class TrainingsComponent implements OnInit {
     });
   }
   onAddToCart(training: Training): void {
+    if(training.quantity <= 0){
+      this.addInfoToastErrorQuantityTraining();
+    }
     if (training.quantity > 0) {
+      this.addInfoToastAddTraining();
       this.cartService.addTraining(training);
-      this.router.navigateByUrl('cart');
     }
     console.log(' Article ajouté au panier : ', training);
   }
@@ -54,6 +58,20 @@ export class TrainingsComponent implements OnInit {
       },
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
+      
     });
+    this.addInfoToastDeleteTraining();
+  }
+
+  addInfoToastAddTraining() {
+    this._toastService.success('Article ajouté au panier');
+  }
+
+  addInfoToastDeleteTraining() {
+    this._toastService.error('Article supprimé de la bdd');
+  }
+
+  addInfoToastErrorQuantityTraining() {
+    this._toastService.error('La quantité doit être supérieur à 0');
   }
 }

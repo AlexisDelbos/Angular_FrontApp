@@ -2,11 +2,11 @@
   <div class="card" style="width: 20rem">
     <div class="card-body">
       <h5 class="card-title text-center">
-        {{ trainingToUpdate ? "Modifier" : "Creer" }} une formation
+        {{ trainingToUpdate ? "Modifier" : "Créer" }} une formation
       </h5>
       <form [formGroup]="trainingForm" (ngSubmit)="onSubmit(trainingForm)">
         <div class="form-group">
-          <label for="name">Name :</label>
+          <label for="name">Nom de la formation :</label>
           <input
             type="text"
             class="form-control"
@@ -50,7 +50,7 @@
           ></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block mt-2">
-          {{ trainingToUpdate ? "Mettre à jour" : "Creer" }}
+          {{ trainingToUpdate ? "Mettre à jour" : "Créer" }}
         </button>
         <div *ngIf="message" class="alert alert-danger mt-3">
           <p>

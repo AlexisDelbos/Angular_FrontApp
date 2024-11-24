@@ -15,7 +15,7 @@
           <td>{{ training.id }}</td>
           <td>{{ training.name }}</td>
           <td>{{ training.quantity }}</td>
-          <td>{{ training.price * training.quantity | number : "1.2-2" }}</td>
+          <td>{{ training.price * training.quantity | currencyAfter }}</td>
           <td class="col-2">
             <a class="btn btn-danger btn-sm" (click)="onRemoveFromCart(training)">Supprimer</a>
           </td>
@@ -25,7 +25,7 @@
           <td></td>
           <td></td>
           <td>
-            <strong>{{ total | number : "1.2-2" }}</strong>
+            <strong>{{ total | currencyAfter }}</strong>
           </td>
           <td></td>
         </tr>

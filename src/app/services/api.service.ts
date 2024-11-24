@@ -30,12 +30,21 @@ export class ApiService {
     return this.http.delete<Training>(environment.host + '/trainings/' + id);
   }
 
-  public getUsers(){
-    return this.http.get<User>(environment.host + '/users/');
+  public getUsers() {
+    return this.http.get<User[]>(environment.host + '/users/');
   }
+  
 
   public getUser(email : String){
     return this.http.get<User>(environment.host + `/users?email=${email}`);
   }
   
+public addUser(user: User) {
+  return this.http.post<User>(`${environment.host}/users/`, user);
+}
+
+public deleteUser(id : number){
+  return this.http.delete<User>(environment.host + '/users/' + id);
+}
+
 }

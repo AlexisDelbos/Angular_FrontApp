@@ -1,1 +1,56 @@
-<p>admin works!</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Table des utilisateurs</h2>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.email }}</td>
+            <td>{{ user.roles}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteUser(user)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <h2 class="text-center mb-4 mt-5">Ajouter un utilisateur</h2>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="w-25"><label for="email" class="form-label">Email</label></td>
+            <td><input id="email" [(ngModel)]="newUser.email" name="email" class="form-control" type="email" required /></td>
+          </tr>
+          <tr>
+            <td><label for="password" class="form-label">Mot de passe</label></td>
+            <td><input id="password" [(ngModel)]="newUser.password" name="password" class="form-control" type="password" required /></td>
+          </tr>
+          <tr>
+            <td><label for="role" class="form-label">Rôle</label></td>
+            <td>
+              <select id="role" [(ngModel)]="newUser.roles" name="role" class="form-select" required>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">
+              <button type="submit" class="btn btn-primary" (click)="createUser()">Créer utilisateur</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -7,4 +7,20 @@
   .is-active .nav-link {
     text-decoration: underline;
   }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .logo {
+    height: 50px;  
+    width: auto;
+  }
   
