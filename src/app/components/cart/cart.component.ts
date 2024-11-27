@@ -38,7 +38,6 @@ export class CartComponent implements OnInit {
   
   order(): void{
     if(this.authService.getUser().email){
-
       this.router.navigateByUrl('customer');
     } else{
       this.router.navigateByUrl('connexion');
@@ -46,6 +45,6 @@ export class CartComponent implements OnInit {
   }
 
   addInfoToastDeleteTraining() {
-    this._toastService.success('Article supprimé');
+    this._toastService.error('Article supprimé');
   }
 }

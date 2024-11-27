@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { User } from 'src/app/model/user.model';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,8 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private authService: AuthenticateService
+    private authService: AuthenticateService,
+    private _toastService : ToastService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class AdminComponent implements OnInit {
     Créer  un utilisateur dans la base de données
   */
     createUser() {
-      // Hash du mot de passe avant de l'envoyer
+      
       let hashedPassword = this.authService.hashPassword(this.newUser.password);  
       const userToSend = {
         email: this.newUser.email,
@@ -83,6 +85,11 @@ export class AdminComponent implements OnInit {
         error: (err) => (this.error = err.message),
         complete: () => (this.error = null),
       });
+      this.addInfoToastDeleteUser();
     } 
+  }
+
+  addInfoToastDeleteUser() {
+    this._toastService.error('Utilsateur supprimé');
   }
 }

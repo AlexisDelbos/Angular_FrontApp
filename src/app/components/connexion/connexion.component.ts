@@ -15,6 +15,7 @@ export class ConnexionComponent implements OnInit {
   errorMessage: string | null = null;
   userForm: FormGroup;
   password: string | undefined;
+  
 
   constructor(
     private apiService: ApiService,
@@ -36,8 +37,18 @@ export class ConnexionComponent implements OnInit {
   }
 
   onSubmit(userForm: FormGroup): void {
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     if (this.userForm.valid) {
-      this.apiService.getUser(userForm.value.email).subscribe(async (data) => {
+      const email = userForm.value.email;
+      
+      if (!emailRegex.test(email)) {
+        this.errorMessage = 'Veuillez entrer un email valide.';
+        return;
+      }
+  
+      this.apiService.getUser(email).subscribe(async (data) => {
         var password = await data[0].password;
         const isPassword = this.authService.authComparePassword(
           userForm.value.password,
@@ -55,14 +66,12 @@ export class ConnexionComponent implements OnInit {
           }
         } else {
           this.addInfoToastFailedConnexion();
-
           this.errorMessage = 'Email ou mot de passe incorrect';
         }
       });
-    } else {
-      this.errorMessage = 'Veuillez remplir le formulaire correctement.';
     }
   }
+  
 
   addInfoToastSuccessConnexion() {
     this._toastService.success('Connexion réussie');

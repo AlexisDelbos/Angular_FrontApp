@@ -56,7 +56,7 @@ export class TrainingComponent implements OnInit {
         this.message = 'Impossible: ' + err;
       },
       complete: () => {
-        this.message = 'formation ajouté';
+        this.message = 'Formation ajouté';
       },
     });
   }
