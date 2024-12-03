@@ -11,15 +11,16 @@ import { TrainingsComponent } from './components/trainings/trainings.component';
 import { UserComponent } from './components/user/user.component';
 import { TrainingComponent } from './components/training/training.component';
 import { HomeComponent } from './components/home/home.component';
+import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
   { path: 'trainings', component: TrainingsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'order', component: OrderComponent },
-  {path:'home', component: HomeComponent},
-  {path: 'training/:trainingId',component: TrainingComponent, canActivate: [AdminGuard],},
-  { path: 'training', component: TrainingComponent, canActivate: [AdminGuard] },
+  { path:'home', component: HomeComponent},
+  { path: 'account', component: AccountComponent},
+  { path: 'training/:trainingId',component: TrainingComponent, canActivate: [AdminGuard],},
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'connexion', component: ConnexionComponent },

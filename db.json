@@ -6,6 +6,13 @@
       "price": 199.99,
       "quantity": 1,
       "id": 1
+    },
+    {
+      "name": "CSS",
+      "description": "Formation CSS\n",
+      "price": 2500,
+      "quantity": 1,
+      "id": 2
     }
   ],
   "users": [

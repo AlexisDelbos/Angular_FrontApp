@@ -29,12 +29,21 @@ export class CartService {
       this.cart = new Map<number, Training>();
     }
   }
-
-   addTraining(training : Training){
-    this.cart.set(training.id, training);
+  
+  addTraining(training: Training) {
+    if (this.cart.has(training.id)) {
+      const existingTraining = this.cart.get(training.id);
+      if (existingTraining) {
+        existingTraining.quantity += training.quantity; 
+        this.cart.set(training.id, existingTraining);
+      }
+    } else {
+      this.cart.set(training.id, training);
+    }
     this.saveCart();
-   }
-
+  }
+  
+  
    saveCustomer(customer : Customer){
     localStorage.setItem('customer', JSON.stringify(customer));
    }
@@ -54,6 +63,15 @@ export class CartService {
     }
     else return undefined;
    }
+
+   getCartCount(): number {
+
+    let totalQuantity = 0;
+    this.cart.forEach(training => {
+      totalQuantity += training.quantity;  
+    });
+    return totalQuantity;  
+  }
 
    getTotal() : number {
     let amount : number = 0;

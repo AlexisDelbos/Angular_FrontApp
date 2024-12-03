@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router, Route } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { ToastService } from 'angular-toastify';
+
 @Component({
   selector: 'app-trainings',
   templateUrl: './trainings.component.html',
@@ -73,5 +74,11 @@ export class TrainingsComponent implements OnInit {
 
   addInfoToastErrorQuantityTraining() {
     this._toastService.error('La quantité doit être supérieur à 0');
+  }
+
+  updateTotal(training: Training): void {
+    if (training.quantity < 0) {
+      training.quantity = 0;
+    }
   }
 }

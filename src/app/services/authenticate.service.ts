@@ -44,7 +44,7 @@ export class AuthenticateService {
 
   private userHasRole(role: string): boolean {
     return this.user?.roles.includes(role) ? true : false;
-  }
+  } 
 
   logout(): void {
     this.user = null;
@@ -68,7 +68,7 @@ export class AuthenticateService {
 
   decryptDataUser(dataUser: string) {
     return CryptoJS.AES.decrypt(dataUser, environment.cryptoKey).toString(
-      CryptoJS.enc.Utf8
+      CryptoJS.enc.Utf8 
     );
   }
 }
